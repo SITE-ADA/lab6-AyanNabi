@@ -1,11 +1,11 @@
 package az.edu.ada.wm2.lab6.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+//import java.util.HashSet;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -14,6 +14,8 @@ import java.util.UUID;
 @Getter
 @Setter
 @Table(name = "products")
+@Builder
+@AllArgsConstructor
 public class Product {
 
     @Id
@@ -33,6 +35,7 @@ public class Product {
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
+    @Builder.Default
     private Set<Category> categories = new HashSet<>();
 
     public Product() {}
