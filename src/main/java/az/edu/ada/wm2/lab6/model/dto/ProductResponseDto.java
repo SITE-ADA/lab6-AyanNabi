@@ -1,10 +1,15 @@
 package az.edu.ada.wm2.lab6.model.dto;
 
+import lombok.Builder;
+import lombok.Data;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
+@Data
+@Builder
 public class ProductResponseDto {
     private UUID id;
 
