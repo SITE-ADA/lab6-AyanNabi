@@ -24,7 +24,7 @@ class ProductMapperTest {
         category.setName("Food");
 
         Product product = Product.builder()
-                .categories(List.of(category))
+                .categories((java.util.Set<Category>) List.of(category))
                 .build();
 
         ProductResponseDto dto = productMapper.toResponseDto(product);

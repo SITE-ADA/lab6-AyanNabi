@@ -9,11 +9,13 @@ import az.edu.ada.wm2.lab6.model.mapper.ProductMapper;
 import az.edu.ada.wm2.lab6.repository.CategoryRepository;
 import az.edu.ada.wm2.lab6.repository.ProductRepository;
 
+import az.edu.ada.wm2.lab6.service.CategoryServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
+@Service
 @ExtendWith(MockitoExtension.class)
 class CategoryServiceImplTest {
 
@@ -44,7 +46,7 @@ class CategoryServiceImplTest {
 
     @Test
     void create_shouldSaveCategory() {
-        CategoryRequestDto dto = new CategoryRequestDto("Food");
+        CategoryRequestDto dto = new CategoryRequestDto();
 
         Category category = new Category();
         category.setName("Food");
@@ -92,10 +94,9 @@ class CategoryServiceImplTest {
         Category category = new Category();
 
         Product product = new Product();
-        category.setProducts(List.of(product));
+        category.setProducts((java.util.Set<Product>) List.of(product));
 
         when(categoryRepository.findById(categoryId)).thenReturn(Optional.of(category));
-        when(productMapper.toResponseDto(product)).thenReturn(new ProductResponseDto());
 
         List<ProductResponseDto> result = categoryService.getProducts(categoryId);
 
