@@ -3,7 +3,10 @@ package az.edu.ada.wm2.lab6.model.mapper;
 import az.edu.ada.wm2.lab6.model.Category;
 import az.edu.ada.wm2.lab6.model.dto.CategoryRequestDto;
 import az.edu.ada.wm2.lab6.model.dto.CategoryResponseDto;
-class CategoryMapper {
+import org.mapstruct.Mapper;
+
+@Mapper
+public interface CategoryMapper {
 
     public static Category toEntity(CategoryRequestDto dto) {
         if (dto == null) {

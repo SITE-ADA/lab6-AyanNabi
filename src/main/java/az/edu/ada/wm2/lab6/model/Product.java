@@ -1,6 +1,8 @@
 package az.edu.ada.wm2.lab6.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -9,6 +11,8 @@ import java.util.Set;
 import java.util.UUID;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "products")
 public class Product {
 
@@ -84,5 +88,9 @@ public class Product {
 
     public void setCategories(Set<Category> categories) {
         this.categories = categories;
+    }
+
+    public void setCategory(Category category) {
+
     }
 }
