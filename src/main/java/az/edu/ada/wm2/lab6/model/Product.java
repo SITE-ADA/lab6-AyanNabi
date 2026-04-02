@@ -1,6 +1,7 @@
 package az.edu.ada.wm2.lab6.model;
 
 import jakarta.persistence.*;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -10,13 +11,6 @@ import java.util.UUID;
 @Entity
 @Table(name = "products")
 public class Product {
-    @ManyToMany
-    @JoinTable(
-            name = "product_category",
-            joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id")
-    )
-    private Set<Category> categories = new HashSet<>();
 
     @Id
     @GeneratedValue
@@ -29,7 +23,14 @@ public class Product {
 
     private LocalDate expirationDate;
 
-    // Constructors
+    @ManyToMany
+    @JoinTable(
+            name = "product_category",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+    private Set<Category> categories = new HashSet<>();
+
     public Product() {}
 
     public Product(String productName, BigDecimal price, LocalDate expirationDate) {
@@ -45,7 +46,6 @@ public class Product {
         this.expirationDate = expirationDate;
     }
 
-    // Getters and Setters
     public UUID getId() {
         return id;
     }
@@ -76,5 +76,13 @@ public class Product {
 
     public void setExpirationDate(LocalDate expirationDate) {
         this.expirationDate = expirationDate;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
     }
 }
